@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
+import { Transition }from 'react-transition-group'
+import classNames from 'classnames'
 import './index.css'
 
 export default class TransitionGroupSample extends React.Component {
@@ -23,9 +25,31 @@ export default class TransitionGroupSample extends React.Component {
 }
 
 function Home() {
-  return <div className="transition-group--home">
-    <p>Home</p>
-  </div>
+  const [inState, setInState] = useState(false)
+  const [isInitialMount, setIsInitialMount] = useState(true)
+  useEffect(() => {
+    if (isInitialMount) {
+      setInState(true)
+      setIsInitialMount(false)
+    }
+  })
+
+  return <Transition in={inState} timeout={0}>
+    {
+      (state) => 
+        <div className={
+          classNames(
+            'transition-item',
+            'transition-group--home',
+            state
+          )
+        }>
+          <p>Home</p>
+          <span>{state}</span>
+          <button onClick={() => setInState(false)}>Exit</button>
+        </div>
+    }
+  </Transition>
 }
 
 function Page1() {

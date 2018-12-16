@@ -15,3 +15,23 @@
   height: 200px;
   background-color: lightgreen;
 }
+
+.transition-item {
+  transition: all 1s linear;
+}
+
+.entering {
+  opacity: 0;
+}
+
+.entered {
+  opacity: 1;
+}
+
+.exiting {
+  opacity: 1;
+}
+
+.exited {
+  opacity: 0;
+}
