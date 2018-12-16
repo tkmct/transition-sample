@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { Route, Switch, NavLink } from 'react-router-dom'
+import { useTransition, animated } from 'react-spring/hooks'
 
 export default function Spring() {
   return <div>
@@ -21,8 +22,20 @@ export default function Spring() {
   </div>
 }
 
+const items = ['Hello', 'World', 'There']
 function Home() {
-  return <h2>Home</h2>
+  const [index, set] = useState(0)
+  const onClick = useCallback(() => set((index + 1) % 3))
+  const transitions = useTransition({
+    items: items[index],
+    keys: item => item,
+    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+    leave: { opacity: 0, transform: 'translate3d(-100%,0,0)' },
+  })
+  return <div onClick={onClick} style={{textAlign: 'center', height: 300, fontSize: 24}}>{ 
+    transitions.map(({item, key, props}) => <animated.div style={props}>{item}</animated.div>) 
+  }</div>
 }
 
 function Page1() {
