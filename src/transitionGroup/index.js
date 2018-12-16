@@ -57,7 +57,6 @@ const useTransitionState = (onUnMount) => {
 
 function Home({ onExit }) {
   const state = useTransitionState(onExit)
-  console.info('Home state: ', state)
 
   return <Transition in={state} timeout={0}>
     {
