@@ -1,13 +1,13 @@
 import React from 'react'
 import history from './history' // TODO: access via ContextAPI
 import { delay } from './utils'
-const TRANSITION_TIME = 500;
+const TRANSITION_TIME = 1000;
 
-const AsyncLink = ({ children, to, onClick, timeout = TRANSITION_TIME }) => {
+const AsyncLink = ({ children, to, onLeave, timeout = TRANSITION_TIME }) => {
   async function transition(e) {
     e.preventDefault()
-    if (onClick) {
-      onClick()
+    if (onLeave) {
+      onLeave()
     }
 
     await delay(timeout)
