@@ -2,7 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
 import { Transition }from 'react-transition-group'
 import classNames from 'classnames'
+import history from '../history' // TODO: access via ContextAPI
+import { delay } from '../utils'
 import './index.css'
+
+const TRANSITION_TIME = 500;
+
+const AsyncLink = ({ children, to, onClick, timeout = TRANSITION_TIME }) => {
+  async function transition(e) {
+    e.preventDefault()
+    if (onClick) {
+      onClick()
+    }
+
+    await delay(timeout)
+    history.push(to)
+  }
+
+  return <a onClick={transition}>{children}</a>
+}
 
 export default class TransitionGroupSample extends React.Component {
   render() {
@@ -10,9 +28,9 @@ export default class TransitionGroupSample extends React.Component {
       <h1>TransitionGroupSample</h1>
       <header>
         <ul>
-          <li><NavLink to="/transitionGroup">Home</NavLink></li>
-          <li><NavLink to="/transitionGroup/page1">Page1</NavLink></li>
-          <li><NavLink to="/transitionGroup/page2">Page2</NavLink></li>
+          <li><AsyncLink to="/transitionGroup">Home</AsyncLink></li>
+          <li><AsyncLink to="/transitionGroup/page1">Page1</AsyncLink></li>
+          <li><AsyncLink to="/transitionGroup/page2">Page2</AsyncLink></li>
         </ul>
       </header>
       <Switch>

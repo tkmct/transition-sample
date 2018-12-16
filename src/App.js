@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom'
+import { Router, Route, Switch, NavLink } from 'react-router-dom'
 import TransitionGroup from './transitionGroup'
 import './App.css';
+import history from './history'
 
 function Home() {
   return <div>
@@ -13,7 +14,7 @@ function Home() {
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/transitionGroup" component={TransitionGroup} />
