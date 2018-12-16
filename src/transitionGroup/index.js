@@ -64,6 +64,7 @@ function Home({ onExit }) {
       (state) => 
         <div className={
           classNames(
+            'fade',
             'transition-item',
             'transition-group--home',
             state
@@ -82,9 +83,12 @@ function Page1({ onExit }) {
 
   return <Transition in={state} timeout={0}>
     {
-      (state) => 
-        <div className={
+      (state) => {
+        console.info(state)
+
+        return <div className={
           classNames(
+            'slide',
             'transition-item',
             'transition-group--page1',
             state
@@ -93,6 +97,7 @@ function Page1({ onExit }) {
           <p>Page1</p>
           <span>{state}</span>
         </div>
+      }
     }
   </Transition>
 }
@@ -106,6 +111,7 @@ function Page2({ onExit }) {
       (state) => 
         <div className={
           classNames(
+            'fade',
             'transition-item',
             'transition-group--page2',
             state

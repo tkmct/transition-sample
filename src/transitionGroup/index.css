@@ -20,18 +20,34 @@
   transition: all 0.5s linear;
 }
 
-.entering {
+.fade.entering {
   opacity: 0;
 }
 
-.entered {
+.fade.entered {
   opacity: 1;
 }
 
-.exiting {
+.fade.exiting {
   opacity: 1;
 }
 
-.exited {
+.fade.exited {
   opacity: 0;
+}
+
+.slide.entering {
+  transform: translateX(-500%);
+}
+
+.slide.entered {
+  transform: translateX(0);
+}
+
+.slide.exiting {
+  transform: translateX(0);
+}
+
+.slide.exited {
+  transform: translateX(500%);
 }
